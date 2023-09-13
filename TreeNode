@@ -1,0 +1,16 @@
+import java.util.ArrayList;
+// to store subcategories of product in the system, create a tree class. 
+public class TreeNode {
+	
+    String category;
+
+    public TreeNode(String category) {
+        this.category = category;
+    }
+
+
+
+    public void display() {
+        System.out.println(category);
+    }
+}
