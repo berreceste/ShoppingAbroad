@@ -1,0 +1,12 @@
+// to store the data in LinkedList, create a node class.
+public class Node {
+	
+    String data;
+    Node next;
+
+    public Node(String data) {
+        this.data = data;
+        this.next = null;
+    }
+
+}
