@@ -1,0 +1,180 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class ShoppingAbroadGUI extends JFrame implements ActionListener{
+	
+    private JFrame userframe;
+    private JTextField usernameTextField;
+    private JPasswordField passwordField;
+    private JButton logInButton;
+
+    private JFrame frame;
+    private JComboBox<String> brandComboBox;
+    private JComboBox<String> productComboBox;
+    private JComboBox<String> countryComboBox;
+    
+    TreeNode bags = new TreeNode("Bags");
+    TreeNode shoes = new TreeNode("Shoes");
+    TreeNode clothes = new TreeNode("Clothes");
+
+ 
+    public ShoppingAbroadGUI() {
+    	// to enter system, we create a Jframe that includes username and password field.
+        userframe = new JFrame();
+        userframe.setBounds(100, 100, 400, 300);
+        userframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        userframe.getContentPane().setLayout(null);
+
+        JLabel lblUsername = new JLabel("Username:");
+        lblUsername.setBounds(50, 50, 100, 20);
+        userframe.getContentPane().add(lblUsername);
+
+        usernameTextField = new JTextField();
+        usernameTextField.setBounds(150, 50, 150, 20);
+        userframe.getContentPane().add(usernameTextField);
+
+        JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setBounds(50, 100, 100, 20);
+        userframe.getContentPane().add(lblPassword);
+
+        passwordField = new JPasswordField();
+        passwordField.setBounds(150, 100, 150, 20);
+        userframe.getContentPane().add(passwordField);
+
+        logInButton = new JButton("Log In");
+        logInButton.setBounds(150, 150, 100, 30);
+        userframe.getContentPane().add(logInButton);
+        // activate a Login button to view the user interface which includes product, brand and country
+        logInButton.addActionListener(this);
+        // to create a GUI that has features of the project, JFrame is used.
+    	
+        frame = new JFrame();
+        frame.setBounds(100, 100, 400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
+
+        JLabel lblBrand = new JLabel("Brand:");
+        lblBrand.setBounds(50, 50, 100, 20);
+        frame.getContentPane().add(lblBrand);
+        
+        brandComboBox = new JComboBox<>();
+        brandComboBox.setBounds(150, 50, 150, 20);
+        frame.getContentPane().add(brandComboBox);
+
+        JLabel lblProduct = new JLabel("Product:");
+        lblProduct.setBounds(50, 100, 100, 20);
+        frame.getContentPane().add(lblProduct);
+
+        productComboBox = new JComboBox<>();
+        productComboBox.setBounds(150, 100, 150, 20);
+        frame.getContentPane().add(productComboBox);
+
+        JLabel lblCountry = new JLabel("Country:");
+        lblCountry.setBounds(50, 150, 100, 20);
+        frame.getContentPane().add(lblCountry);
+
+        countryComboBox = new JComboBox<>();
+        countryComboBox.setBounds(150, 150, 150, 20);
+        frame.getContentPane().add(countryComboBox);
+
+        JButton btnOrder = new JButton("Place Order");
+        btnOrder.setBounds(150, 200, 100, 30);
+        frame.getContentPane().add(btnOrder);
+        // to print the details of order in console,''Place Order'' Button is added.
+        btnOrder.addActionListener(this);
+    }
+    
+/// to insert subcategories of the project, Linked List is used and data is stored in it.
+    private void populateDropdowns() {
+        LinkedList brandList = new LinkedList();
+        brandList.insert("YSL");
+        brandList.insert("Chanel");
+        brandList.insert("Gucci");
+        
+        LinkedList categoryList = new LinkedList();
+        categoryList.insert("Bags");
+        categoryList.insert("Shoes");
+        categoryList.insert("Clothes");
+        
+        LinkedList countryList = new LinkedList();
+        countryList.insert("United Kingdom");
+        countryList.insert("United States of America");
+        countryList.insert("Italy");
+        
+        TreeNode bags = new TreeNode("Bags");
+        TreeNode shoes = new TreeNode("Shoes");
+        TreeNode clothes = new TreeNode("Clothes"); 
+
+
+        Node brandCurrent = brandList.head;
+        while (brandCurrent != null) {
+            brandComboBox.addItem(brandCurrent.data);
+            brandCurrent = brandCurrent.next;
+        }
+
+        Node categoryCurrent = categoryList.head;
+        while (categoryCurrent != null) {
+            productComboBox.addItem(categoryCurrent.data);
+            categoryCurrent = categoryCurrent.next;
+        }
+
+        Node countryCurrent = countryList.head;
+        while (countryCurrent != null) {
+            countryComboBox.addItem(countryCurrent.data);
+            countryCurrent = countryCurrent.next;
+        }
+        
+    }
+    
+
+    public void usershow() {
+        userframe.setVisible(true);
+    }
+
+
+    public static void main(String[] args) {
+
+        
+        ShoppingAbroadGUI gui = new ShoppingAbroadGUI();
+        gui.usershow();
+    }
+// after click the ''Log in '' button, to display the GUI, configuration of this frame are presented.
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+        if (e.getSource() == logInButton) {
+        	
+            populateDropdowns();
+            frame.setVisible(true);
+        }
+            String username = usernameTextField.getText();
+            char[] passwordChars = passwordField.getPassword();
+            String password = new String(passwordChars);
+		
+			
+		// TODO Auto-generated method stub
+        String brand = brandComboBox.getSelectedItem().toString();
+        String product = productComboBox.getSelectedItem().toString();
+        String country = countryComboBox.getSelectedItem().toString();
+// to display the order's information to the console
+        System.out.println("Order Placed ");
+        System.out.println("Brand: " + brand);
+        System.out.println("Product: " + product);
+        System.out.println("Country: " + country);
+
+		
+	}
+
+
+
+}
+
+
+
